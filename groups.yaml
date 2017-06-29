@@ -1,0 +1,10 @@
+living:
+  name: Living
+  entities:
+  - light.Living2
+  - light.Living1
+Pieza:
+  name: Pieza
+  entities:
+  - light.Pieza1
+  - light.Pieza2

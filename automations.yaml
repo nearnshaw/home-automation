@@ -1,0 +1,51 @@
+- action:
+  - alias: Nico_pushbullet
+    service: notify.nicopushbullet
+    data:
+      message: Shhhh estoy viendo algo
+  alias: CharlieOn
+  id: '1497921737529'
+  trigger:
+  - entity_id: media_player.Charlie
+    from: 'off'
+    platform: state
+    to: playing
+  - entity_id: media_player.Charlie
+    from: idle
+    platform: state
+    to: playing
+- action:
+  - alias: charlieOn
+    service: media_player.play_media
+    data:
+      entity_id: media_player.Charlie
+      media_id: https://www.youtube.com/watch?v=MDj5c15ja_s
+      media_type: video
+  trigger:
+  - event_data:
+      message: turn Charlie on
+    event_type: conversation
+    platform: event
+- action:
+  - alias: Turn off light with command
+    service: light.turn_off
+    data:
+      entity_id: group.Living
+      transition: 10
+  trigger:
+  - event_data:
+      message: turn Living off
+    event_type: conversation
+    platform: event
+- action:
+  - alias: Turn on light with command
+    service: light.turn_on
+    data:
+      entity_id: group.Living
+      transition: 10
+      brightness: 2
+  trigger:
+  - event_data:
+      message: turn Living on
+    event_type: conversation
+    platform: event
