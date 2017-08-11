@@ -67,14 +67,14 @@ notify:
 light:
   platform: limitlessled
   bridges:
-    - host: 192.168.0.11
+    - host: 192.168.0.10
       version: 5
       port: 8899
       groups:
       - number: 1
         name: Pieza1
       - number: 3
-        name: Pieza2        
+        name: Pieza2
       - number: 2
         name: Living1
       - number: 4

@@ -1,9 +1,14 @@
+
+
+# charlie on -> luces living bajas
 - action:
-  - alias: Nico_pushbullet
-    service: notify.nicopushbullet
+  - alias: Turn light down w charlie
+    service: light.turn_on
     data:
-      message: Shhhh estoy viendo algo
-  alias: CharlieOn
+      entity_id: group.Living
+      transition: 5
+      brightness: 1
+  alias: CharlieLightsDown
   id: '1497921737529'
   trigger:
   - entity_id: media_player.Charlie
@@ -14,6 +19,74 @@
     from: idle
     platform: state
     to: playing
+  - entity_id: media_player.Charlie
+    from: paused
+    platform: state
+    to: playing
+
+
+# charlie off -> luces living altas
+- action:
+  - alias: Turn light up w charlie
+    service: light.turn_on
+    data:
+      entity_id: group.Living
+      transition: 1
+      brightness: 255
+  alias: CharlieLightsUp
+  id: '1497921737529'
+  trigger:
+  - entity_id: media_player.Charlie
+    from: playing
+    platform: state
+    to: 'off'
+  - entity_id: media_player.Charlie
+    from: idle
+    platform: state
+    to: 'off'
+  - entity_id: media_player.Charlie
+    from: paused
+    platform: state
+    to: 'off'
+
+# charlie paused -> luces living medias
+- action:
+  - alias: Turn light to mid w charlie paused
+    service: light.turn_on
+    data:
+      entity_id: group.Living
+      transition: 2
+      brightness: 90
+  alias: CharlieLightsMid
+  id: '1497921737529'
+  trigger:
+  - entity_id: media_player.Charlie
+    from: playing
+    platform: state
+    to: paused
+
+
+# charlie on -> pushbullet
+#- action:
+#  - alias: Nico_pushbullet
+#    service: notify.nicopushbullet
+#    data:
+#      message: Shhhh estoy viendo algo
+#  alias: CharlieOn
+#  id: '1497921737529'
+#  trigger:
+#  - entity_id: media_player.Charlie
+#    from: 'off'
+#    platform: state
+#    to: playing
+#  - entity_id: media_player.Charlie
+#    from: idle
+#    platform: state
+#    to: playing
+
+
+
+# speech "turn Charlie on" -> charlie on
 - action:
   - alias: charlieOn
     service: media_player.play_media
@@ -26,6 +99,8 @@
       message: turn Charlie on
     event_type: conversation
     platform: event
+
+# speech "turn living off" -> luces living off
 - action:
   - alias: Turn off light with command
     service: light.turn_off
@@ -37,6 +112,8 @@
       message: turn Living off
     event_type: conversation
     platform: event
+
+# speech "turn living on" -> luces living on bajas
 - action:
   - alias: Turn on light with command
     service: light.turn_on
