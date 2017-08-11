@@ -41,13 +41,17 @@
     platform: state
     to: 'off'
   - entity_id: media_player.Charlie
-    from: idle
-    platform: state
-    to: 'off'
-  - entity_id: media_player.Charlie
     from: paused
     platform: state
     to: 'off'
+  - entity_id: media_player.Charlie
+    from: playing
+    platform: state
+    to: idle
+  - entity_id: media_player.Charlie
+    from: paused
+    platform: state
+    to: idle
 
 # charlie paused -> luces living medias
 - action:
@@ -56,7 +60,7 @@
     data:
       entity_id: group.Living
       transition: 2
-      brightness: 90
+      brightness: 60
   alias: CharlieLightsMid
   id: '1497921737529'
   trigger:
