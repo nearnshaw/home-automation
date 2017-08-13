@@ -23,7 +23,13 @@
     from: paused
     platform: state
     to: playing
-
+  condition:
+    condition: and
+    conditions:
+      - condition: sun
+        after: sunset
+      - condition: sun
+        before: sunrise
 
 # charlie off -> luces living altas
 - action:
@@ -52,6 +58,14 @@
     from: paused
     platform: state
     to: idle
+  condition:
+    condition: and
+    conditions:
+      - condition: sun
+        after: sunset
+      - condition: sun
+        before: sunrise
+
 
 # charlie paused -> luces living medias
 - action:
@@ -68,7 +82,13 @@
     from: playing
     platform: state
     to: paused
-
+  condition:
+    condition: and
+    conditions:
+      - condition: sun
+        after: sunset
+      - condition: sun
+        before: sunrise
 
 # charlie on -> pushbullet
 #- action:
